@@ -30,10 +30,24 @@ jobs:
           java-version: '17'
           cache: 'gradle'
 
-      - name: Install Android NDK and CMake
+      - name: Setup Android NDK and Tools
         run: |
-          yes | sdkmanager --licenses > /dev/null 2>&1 || true
-          sdkmanager --install "ndk;28.2.13676358" "cmake;3.22.1"
+          ANDROID_ROOT="${ANDROID_HOME:-/usr/local/lib/android/sdk}"
+          SDKMANAGER=$(find "$ANDROID_ROOT/cmdline-tools" -name sdkmanager -type f 2>/dev/null | sort -V | tail -n 1)
+          if [ -z "$SDKMANAGER" ]; then
+            echo "ERROR: sdkmanager not found under $ANDROID_ROOT/cmdline-tools"
+            exit 1
+          fi
+          CMDLINE_DIR=$(dirname "$SDKMANAGER")
+          echo "$CMDLINE_DIR" >> $GITHUB_PATH
+          echo "$ANDROID_ROOT/platform-tools" >> $GITHUB_PATH
+          echo "Found sdkmanager at: $SDKMANAGER"
+
+          # Accept all SDK licenses cleanly
+          printf 'y\n%.0s' {1..50} | "$SDKMANAGER" --licenses || true
+
+          # Install pinned NDK and CMake
+          "$SDKMANAGER" --install "ndk;28.2.13676358" "cmake;3.22.1"
 
       - name: Download bundled runtime agent assets
         run: |
