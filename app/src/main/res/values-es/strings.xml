@@ -3,6 +3,7 @@
 
     <!-- Navigation / Bottom Tabs -->
     <string name="tab_projects">Proyectos</string>
+    <string name="tab_teacher">Profesor</string>
     <string name="tab_agent">Agente</string>
     <string name="tab_settings">Ajustes</string>
 

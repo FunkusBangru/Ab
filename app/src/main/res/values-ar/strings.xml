@@ -3,6 +3,7 @@
 
     <!-- Navigation / Bottom Tabs -->
     <string name="tab_projects">المشاريع</string>
+    <string name="tab_teacher">المعلم</string>
     <string name="tab_agent">الوكيل</string>
     <string name="tab_settings">الإعدادات</string>
 

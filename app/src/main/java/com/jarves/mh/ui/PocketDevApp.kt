@@ -279,8 +279,11 @@ import androidx.compose.material.icons.filled.SmartToy
 import androidx.compose.material.icons.filled.Terminal
 import androidx.compose.material3.ExtendedFloatingActionButton
 
+import androidx.compose.material.icons.filled.School
+
 private enum class RootScreen(@StringRes val labelRes: Int, val icon: ImageVector) {
     PROJECTS(R.string.tab_projects, Icons.Default.Folder),
+    TEACHER(R.string.tab_teacher, Icons.Default.School),
     AGENT(R.string.tab_agent, Icons.Default.SmartToy),
     SETTINGS(R.string.tab_settings, Icons.Default.Settings),
 }
@@ -2511,6 +2514,9 @@ private fun RootScreenHost(
                     onPing = viewModel::pingApi,
                     onToggleTheme = viewModel::toggleTheme,
                     onInstallUpdate = viewModel::installAppUpdate,
+                )
+                RootScreen.TEACHER -> TeacherScreen(
+                    onDismiss = { screen = RootScreen.PROJECTS },
                 )
                 RootScreen.AGENT -> AgentScreen(
                     state = state,

@@ -3,6 +3,7 @@
 
     <!-- Navigation / Bottom Tabs -->
     <string name="tab_projects">Проекты</string>
+    <string name="tab_teacher">Учитель</string>
     <string name="tab_agent">Агент</string>
     <string name="tab_settings">Настройки</string>
 
